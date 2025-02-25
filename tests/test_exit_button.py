@@ -4,20 +4,21 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 import pytest
 from test_login import login
+import  locator_list
 
-def test_click_exit_button_go_to_logout_profile(driver):
-    driver.implicitly_wait(3)
-    driver.get('https://stellarburgers.nomoreparties.site/')
 
-    elements = driver.find_elements(By.TAG_NAME, "button")
-    elements[0].click()
+class TestExitButton:
 
-    login(driver)
-    driver.find_element(By.LINK_TEXT, 'Личный Кабинет').click()
+    def test_click_exit_button_go_to_logout_profile(self, driver):
 
-    driver.find_element(By.XPATH, ".//button[text()='Выход']").click()
+        driver.get('https://stellarburgers.nomoreparties.site/')
 
-    driver.find_element(By.LINK_TEXT, 'Личный Кабинет').click()
+        homepage_buttons[0].click()
+        login(driver)
+        lk_button.click()
 
-    assert driver.current_url == 'https://stellarburgers.nomoreparties.site/login'
-    driver.quit()
+        exit_button.click()
+
+        lk_button.click()
+        WebDriverWait(driver, 3)
+        assert driver.current_url == 'https://stellarburgers.nomoreparties.site/login'

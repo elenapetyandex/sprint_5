@@ -3,72 +3,47 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 import pytest
+import locator_list
+import helpers
 
-def login(driver):
-    elements_2 = driver.find_elements(By.TAG_NAME, "input")
+class TestLogin:
 
-    for element in elements_2:
-        element.clear()
+    def test_login_account_by_HomePage_login_successful(self, driver):
 
-    elements_2[0].send_keys('elena_pet_18_101@yandex.ru')
-
-    elements_2[1].send_keys('arrr86$')
-
-    driver.find_element(By.XPATH, ".//button[text()='Войти']").click()
-
-def test_login_account_by_HomePage_login_successful(driver):
-
-    driver.implicitly_wait(3)
-    driver.get('https://stellarburgers.nomoreparties.site/')
-
-    elements = driver.find_elements(By.TAG_NAME, "button")
-    elements[0].click()
-
-    login(driver)
+        driver.get('https://stellarburgers.nomoreparties.site/')
+        homepage_buttons[0].click()
+        login(driver)
+        lk_button.click()
+        WebDriverWait(driver, 3)
+        assert driver.current_url == 'https://stellarburgers.nomoreparties.site/account/profile'
+        exit_button.click()
 
 
-    driver.find_element(By.LINK_TEXT, 'Личный Кабинет').click()
+    def test_login_by_personal_account_successful(self, driver):
 
+        driver.get('https://stellarburgers.nomoreparties.site/')
+        lk_button.click()
 
-    assert driver.current_url == 'https://stellarburgers.nomoreparties.site/account/profile'
-    driver.find_element(By.XPATH, ".//button[text()='Выход']").click()
+        login(driver)
 
-    driver.quit()
-
-def test_login_by_personal_account_successful(driver):
-    driver.implicitly_wait(3)
-
-    driver.get('https://stellarburgers.nomoreparties.site/')
-
-    driver.find_element(By.LINK_TEXT, 'Личный Кабинет').click()
-    print(1)
-    login(driver)
-    print(2)
-    driver.find_element(By.LINK_TEXT, 'Личный Кабинет').click()
-    print(3)
-
-    assert driver.current_url == 'https://stellarburgers.nomoreparties.site/account/profile'
-    driver.find_element(By.XPATH, ".//button[text()='Выход']").click()
-
-    driver.quit()
+        lk_button.click()
+        WebDriverWait(driver, 3)
+        assert driver.current_url == 'https://stellarburgers.nomoreparties.site/account/profile'
+        exit_button.click()
 
 # вход через кнопку регистрации проверяется в регистрации
 
-def test_login_by_recover_password_successful(driver):
-    driver.implicitly_wait(3)
-    driver.get('https://stellarburgers.nomoreparties.site/')
+    def test_login_by_recover_password_successful(self, driver):
+        driver.get('https://stellarburgers.nomoreparties.site/')
+        lk_button.click()
+        password_ap.click()
+        login_reg.click()
+        login(driver)
+        lk_button.click()
+        WebDriverWait(driver, 3)
+        assert driver.current_url == 'https://stellarburgers.nomoreparties.site/account/profile'
+        exit_button.click()
 
-    driver.find_element(By.LINK_TEXT, 'Личный Кабинет').click()
 
-    driver.find_element(By.XPATH, ".//a[text()='Восстановить пароль']").click()
-
-    driver.find_element(By.XPATH,".//a[text()='Войти']").click()
-
-    login(driver)
-    driver.find_element(By.LINK_TEXT, 'Личный Кабинет').click()
-    assert driver.current_url == 'https://stellarburgers.nomoreparties.site/account/profile'
-    driver.find_element(By.XPATH, ".//button[text()='Выход']").click()
-
-    driver.quit()
 
 
