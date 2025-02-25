@@ -2,12 +2,16 @@ import pytest
 from selenium import webdriver
 
 
-@pytest.fixture()
+@pytest.fixture(scope='function')
 def driver():
     driver = webdriver.Chrome()
-    return driver
 
-#@pytest.fixture()
-#def driver():
-#    driver = webdriver.Firefox()
-#    return driver
+    yield driver
+    driver.quit()
+
+@pytest.fixture(scope='function')
+def driver_firefox():
+    driver = webdriver.Firefox()
+
+    yield driver
+    driver.quit()
