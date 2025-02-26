@@ -1,7 +1,6 @@
 
-from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
-import pytest
+from selenium.webdriver.support import expected_conditions
 from locators import Locators
 from data import Data
 
@@ -21,9 +20,9 @@ class TestExitButton:
 
         driver.find_element(*Locators.login_button).click()
         driver.find_element(*Locators.lk_button).click()
-
+        WebDriverWait(driver, 3).until(expected_conditions.element_to_be_clickable ((Locators.exit_button)))
         driver.find_element(*Locators.exit_button).click()
-
+        WebDriverWait(driver, 3).until(expected_conditions.element_to_be_clickable((Locators.lk_button)))
         driver.find_element(*Locators.lk_button).click()
-        WebDriverWait(driver, 3)
+
         assert driver.current_url == Data.URL_login

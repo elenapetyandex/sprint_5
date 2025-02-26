@@ -1,7 +1,5 @@
-
-from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
-import pytest
+from selenium.webdriver.support import expected_conditions
 from locators import Locators
 from data import Data
 
@@ -21,9 +19,9 @@ class TestLogin:
 
         driver.find_element(*Locators.login_button).click()
         driver.find_element(*Locators.lk_button).click()
-        WebDriverWait(driver, 3)
+        WebDriverWait(driver, 3).until(expected_conditions.presence_of_element_located((Locators.exit_button)))
         assert driver.current_url == Data.URL_profile
-        driver.find_element(*Locators.exit_button).click()
+
 
 
     def test_login_by_personal_account_successful(self, driver):
@@ -42,9 +40,9 @@ class TestLogin:
         driver.find_element(*Locators.login_button).click()
 
         driver.find_element(*Locators.lk_button).click()
-        WebDriverWait(driver, 3)
+        WebDriverWait(driver, 3).until(expected_conditions.presence_of_element_located((Locators.exit_button)))
         assert driver.current_url == Data.URL_profile
-        driver.find_element(*Locators.exit_button).click()
+
 
 # вход через кнопку регистрации проверяется в регистрации
 
@@ -63,9 +61,9 @@ class TestLogin:
 
         driver.find_element(*Locators.login_button).click()
         driver.find_element(*Locators.lk_button).click()
-        WebDriverWait(driver, 3)
+        WebDriverWait(driver, 3).until(expected_conditions.presence_of_element_located((Locators.exit_button)))
         assert driver.current_url == Data.URL_profile
-        driver.find_element(*Locators.exit_button).click()
+
 
 
 

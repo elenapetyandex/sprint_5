@@ -1,9 +1,8 @@
-from select import error
-from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from locators import Locators
 from data import Data
 import pytest
+from selenium.webdriver.support import expected_conditions
 
 
 
@@ -24,7 +23,7 @@ class TestRegistration:
         reg_input_elements[1].send_keys(email)
         reg_input_elements[2].send_keys(password)
         driver.find_element(*Locators.reg_button_2).click()
-        WebDriverWait(driver, 3)
+        WebDriverWait(driver, 3).until(expected_conditions.presence_of_element_located((Locators.login_button)))
         assert  driver.current_url == Data.URL_login
 
 
@@ -43,7 +42,7 @@ class TestRegistration:
         reg_input_elements[1].send_keys(email)
         reg_input_elements[2].send_keys(password)
         driver.find_element(*Locators.reg_button_2).click()
-        WebDriverWait(driver, 3)
+
 
         assert driver.find_element(*Locators.error_message)
 

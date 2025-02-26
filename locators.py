@@ -25,3 +25,7 @@ class Locators:
     reg_input = (By.TAG_NAME, "input") # форма ввода регистрации
     reg_button_2 = (By.XPATH, ".//button[text()='Зарегистрироваться']")# кнопка "зарегистрироваться" в форме логин в форме регистрации
     error_message = (By.XPATH, ".//p[@class='input__error text_type_main-default']") # сообщение о некорректном пароле
+    soberite_burger = (By.XPATH, ".//h1[text()='Соберите бургер']")
+    souses_img = (By.XPATH, ".//img[contains(@alt, 'Соус')]")# соусы в конструкторе картинки
+    bulki_img = (By.XPATH, ".//img[contains(@alt, ' ,булка')]") #картинки булок в конструкторе
+    meat_img = (By.XPATH, ".//img[contains(@alt, ' ,булка')]")  # картинка мясо в конструкторе
